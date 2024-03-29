@@ -1,18 +1,20 @@
 PATH
   remote: .
   specs:
-    dorian-anonymize-yaml (0.1.2)
+    dorian-anonymize-json (0.1.0)
+      json (~> 2)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    json (2.7.1)
 
 PLATFORMS
   arm64-darwin-23
   ruby
 
 DEPENDENCIES
-  dorian-anonymize-yaml!
+  dorian-anonymize-json!
 
 RUBY VERSION
    ruby 3.3.0p0

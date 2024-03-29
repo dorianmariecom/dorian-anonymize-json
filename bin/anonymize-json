@@ -1,15 +1,13 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
-#!/usr/bin/env ruby
-# frozen_string_literal: true
 
-require "yaml"
+require "json"
 
-def anonymize_yaml(data)
+def anonymize_json(data)
   if data.is_a?(Array)
-    data.map { |element| anonymize_yaml(element) }
+    data.map { |element| anonymize_json(element) }
   elsif data.is_a?(Hash)
-    data.transform_values { |value| anonymize_yaml(value) }
+    data.transform_values { |value| anonymize_json(value) }
   elsif data.is_a?(String)
     data.gsub(/[0-9]/, "0").gsub(/[a-z]/, "a").gsub(/[A-Z]/, "A")
   elsif data.is_a?(Integer)
@@ -44,6 +42,6 @@ end
 
 inputs.each do |input|
   content = File.exist?(input) ? File.read(input) : input
-  yaml = anonymize_yaml(YAML.safe_load(content)).to_yaml
-  File.exist?(input) ? File.write(input, yaml) : puts(yaml)
+  json = JSON.pretty_generate(anonymize_json(JSON.parse(content)))
+  File.exist?(input) ? File.write(input, json) : puts(json)
 end
