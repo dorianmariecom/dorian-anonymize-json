@@ -4,17 +4,18 @@
 require "json"
 
 def anonymize_json(data)
-  if data.is_a?(Array)
+  case data
+  when Array
     data.map { |element| anonymize_json(element) }
-  elsif data.is_a?(Hash)
+  when Hash
     data.transform_values { |value| anonymize_json(value) }
-  elsif data.is_a?(String)
+  when String
     data.gsub(/[0-9]/, "0").gsub(/[a-z]/, "a").gsub(/[A-Z]/, "A")
-  elsif data.is_a?(Integer)
+  when Integer
     0
-  elsif data.is_a?(Float)
+  when Float
     0.0
-  elsif data.is_a?(TrueClass) || data.is_a?(FalseClass)
+  when TrueClass, FalseClass
     false
   else
     raise NotImplementedError, data.class.name
@@ -33,11 +34,7 @@ if inputs.empty?
   inputs = $stdin.each_line.to_a
 
   inputs =
-    if File.exist?(inputs.first.strip)
-      inputs.map(&:strip)
-    else
-      [inputs.join]
-    end
+    (File.exist?(inputs.first.strip) ? inputs.map(&:strip) : [inputs.join])
 end
 
 inputs.each do |input|
