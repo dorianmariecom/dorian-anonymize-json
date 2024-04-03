@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "dorian-anonymize-json"
-  s.version = "0.1.1"
+  s.version = "0.1.2"
   s.summary = "Anonymize JSON file"
   s.description = "#{s.summary}\n\ne.g. `anonymize-json spec/**/*.json`"
   s.authors = ["Dorian Marié"]
@@ -13,4 +13,6 @@ Gem::Specification.new do |s|
   s.license = "MIT"
   s.metadata = { "rubygems_mfa_required" => "true" }
   s.add_dependency "json", "~> 2"
+
+  s.required_ruby_version = ">= 3.3.0"
 end
