@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     dorian-anonymize-json (0.1.4)
-      json (~> 2)
+      json
 
 GEM
   remote: https://rubygems.org/
