@@ -3,8 +3,8 @@
 Gem::Specification.new do |s|
   s.name = "dorian-anonymize-json"
   s.version = "0.2.1"
-  s.summary = "Anonymize JSON file"
-  s.description = "#{s.summary}\n\ne.g. `anonymize-json spec/**/*.json`"
+  s.summary = "anonymize json file"
+  s.description = s.summary
   s.authors = ["Dorian Marié"]
   s.email = "dorian@dorianmarie.com"
   s.files = ["bin/anonymize-json"]
