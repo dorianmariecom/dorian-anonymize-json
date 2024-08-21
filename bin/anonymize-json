@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require "json"
+require "dorian/arguments"
 
 def anonymize_json(data)
   case data
@@ -22,23 +23,17 @@ def anonymize_json(data)
   end
 end
 
-if ARGV[0] == "--help" || ARGV[0] == "-h"
-  puts "USAGE: anonymize-yaml FILES..."
-  puts "USAGE: ... | anonymize-yaml"
-  exit
+parsed = Dorian::Arguments.parse(version: { alias: :v }, help: { alias: :h })
+
+abort parsed.help if parsed.options.help
+
+if parsed.options.version
+  abort File.read(File.expand_path("../../VERSION", __FILE__))
 end
 
-inputs = ARGV
-
-if inputs.empty?
-  inputs = $stdin.each_line.to_a
-
-  inputs =
-    (File.exist?(inputs.first.strip) ? inputs.map(&:strip) : [inputs.join])
-end
+inputs = parsed.arguments + parsed.files.map { |file| File.read(file) }
+inputs = [$stdin.each_line.to_a.map(&:strip).join] if inputs.empty?
 
 inputs.each do |input|
-  content = File.exist?(input) ? File.read(input) : input
-  json = JSON.pretty_generate(anonymize_json(JSON.parse(content)))
-  File.exist?(input) ? File.write(input, json) : puts(json)
+  puts(JSON.pretty_generate(anonymize_json(JSON.parse(input))))
 end
