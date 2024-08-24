@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dorian-anonymize-json (0.2.3)
+    dorian-anonymize-json (1.0.0)
       dorian-arguments
       json
 
