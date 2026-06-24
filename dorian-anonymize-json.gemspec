@@ -14,5 +14,5 @@ Gem::Specification.new do |s|
   s.metadata = { "rubygems_mfa_required" => "true" }
   s.add_dependency "dorian-arguments", ">= 1.2.3", "< 2"
   s.add_dependency "json", ">= 2.20", "< 3"
-  s.required_ruby_version = ">= 3.0"
+  s.required_ruby_version = ">= 4.0"
 end
